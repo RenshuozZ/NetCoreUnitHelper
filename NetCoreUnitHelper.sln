@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DES", "DES\DES.csproj", "{C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exif", "Exif\Exif.csproj", "{66AC7F4E-331B-4C3B-9EF4-196649D61D07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadScheduling", "ThreadScheduling\ThreadScheduling.csproj", "{F022310E-0291-4DEA-B2EC-53BBF39E4A6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreadScheduling", "ThreadScheduling\ThreadScheduling.csproj", "{F022310E-0291-4DEA-B2EC-53BBF39E4A6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaiduAiSdk", "BaiduAiSdk\BaiduAiSdk.csproj", "{EE36F54A-B775-4F84-A3BE-CD461CB42BB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F022310E-0291-4DEA-B2EC-53BBF39E4A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F022310E-0291-4DEA-B2EC-53BBF39E4A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F022310E-0291-4DEA-B2EC-53BBF39E4A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE36F54A-B775-4F84-A3BE-CD461CB42BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE36F54A-B775-4F84-A3BE-CD461CB42BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE36F54A-B775-4F84-A3BE-CD461CB42BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE36F54A-B775-4F84-A3BE-CD461CB42BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
