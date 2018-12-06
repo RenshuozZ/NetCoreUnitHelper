@@ -7,14 +7,21 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            ArrayList obj = new ArrayList();
-            obj.Add(50);
-            obj.Add("Dog");
-            foreach (var i in obj)
+            MyStruct[] array = new MyStruct[] { new MyStruct { Name = "1" }, new MyStruct { Name = "2" } };
+            //foreach (var item in array)
+            //{
+            //    item.Name = "3";
+            //}
+            for (int i = 0; i < array.Length; i++)
             {
-                Console.WriteLine(i);
+                array[i].Name = "3";
             }
+
             Console.ReadLine();
         }
+    }
+    struct MyStruct
+    {
+        public string Name { get; set; }
     }
 }
