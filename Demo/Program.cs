@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Demo
 {
@@ -7,15 +9,22 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            ArrayList arrayList = new ArrayList();
+            Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
 
-            for (int i = 0; i < 50; i++)
+             Test();
+
+            Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
+            Console.ReadKey();
+        }
+
+        static async void Test()
+        {
+            await Task.Run(() =>
             {
-                Console.WriteLine(arrayList.Capacity);
-                arrayList.Add(i);
-            }
-            Console.ReadLine();
+                Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
+            });
+            Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
         }
     }
-    
+
 }
