@@ -9,76 +9,90 @@ namespace AES
     {
         static void Main(string[] args)
         {
-            var key = Guid.NewGuid().ToString("N");
-            var name = "Jeffcky";
+            var key = "AesKey";
+            var name = "BC033938-2555-4600-9E76-D09E25464E45";
             Console.WriteLine($"加密字符串为{name}");
             var encryptStr = Encrypt(name, key);
             Console.WriteLine($"加密后结果为：{encryptStr}");
             var decryptStr = Decrypt(encryptStr, key);
             Console.WriteLine($"解密后字符串为{decryptStr}");
         }
-        public static string Encrypt(string input, string key)
+        public static string Encrypt( string text, string key)
         {
-            var encryptKey = Encoding.UTF8.GetBytes(key);
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("Key must have valid value.", nameof(key));
+            if (string.IsNullOrEmpty(text))
+                throw new ArgumentException("The text must have valid value.", nameof(text));
 
-            using (var aesAlg = Aes.Create())
+            var buffer = Encoding.UTF8.GetBytes(text);
+            var hash = new SHA512CryptoServiceProvider();
+            var aesKey = new byte[24];
+            Buffer.BlockCopy(hash.ComputeHash(Encoding.UTF8.GetBytes(key)), 0, aesKey, 0, 24);
+
+            using (var aes = Aes.Create())
             {
-                using (var encryptor = aesAlg.CreateEncryptor(encryptKey, aesAlg.IV))
+                if (aes == null)
+                    throw new ArgumentException("Parameter must not be null.", nameof(aes));
+
+                aes.Key = aesKey;
+
+                using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                using (var resultStream = new MemoryStream())
                 {
-                    using (var msEncrypt = new MemoryStream())
+                    using (var aesStream = new CryptoStream(resultStream, encryptor, CryptoStreamMode.Write))
+                    using (var plainStream = new MemoryStream(buffer))
                     {
-                        using (var csEncrypt = new CryptoStream(msEncrypt, encryptor,
-                            CryptoStreamMode.Write))
-
-                        using (var swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            swEncrypt.Write(input);
-                        }
-
-                        var iv = aesAlg.IV;
-
-                        var decryptedContent = msEncrypt.ToArray();
-
-                        var result = new byte[iv.Length + decryptedContent.Length];
-
-                        Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
-                        Buffer.BlockCopy(decryptedContent, 0, result,
-                            iv.Length, decryptedContent.Length);
-
-                        return Convert.ToBase64String(result);
+                        plainStream.CopyTo(aesStream);
                     }
+
+                    var result = resultStream.ToArray();
+                    var combined = new byte[aes.IV.Length + result.Length];
+                    Array.ConstrainedCopy(aes.IV, 0, combined, 0, aes.IV.Length);
+                    Array.ConstrainedCopy(result, 0, combined, aes.IV.Length, result.Length);
+
+                    return Convert.ToBase64String(combined);
                 }
             }
         }
-        public static string Decrypt(string input, string key)
+
+        public static string Decrypt( string encryptedText, string key)
         {
-            var fullCipher = Convert.FromBase64String(input);
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("Key must have valid value.", nameof(key));
+            if (string.IsNullOrEmpty(encryptedText))
+                throw new ArgumentException("The encrypted text must have valid value.", nameof(encryptedText));
 
-            var iv = new byte[16];
-            var cipher = new byte[16];
+            var combined = Convert.FromBase64String(encryptedText);
+            var buffer = new byte[combined.Length];
+            var hash = new SHA512CryptoServiceProvider();
+            var aesKey = new byte[24];
+            Buffer.BlockCopy(hash.ComputeHash(Encoding.UTF8.GetBytes(key)), 0, aesKey, 0, 24);
 
-            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
-            var decryptKey = Encoding.UTF8.GetBytes(key);
-
-            using (var aesAlg = Aes.Create())
+            using (var aes = Aes.Create())
             {
-                using (var decryptor = aesAlg.CreateDecryptor(decryptKey, iv))
+                if (aes == null)
+                    throw new ArgumentException("Parameter must not be null.", nameof(aes));
+
+                aes.Key = aesKey;
+
+                var iv = new byte[aes.IV.Length];
+                var ciphertext = new byte[buffer.Length - iv.Length];
+
+                Array.ConstrainedCopy(combined, 0, iv, 0, iv.Length);
+                Array.ConstrainedCopy(combined, iv.Length, ciphertext, 0, ciphertext.Length);
+
+                aes.IV = iv;
+
+                using (var decryptor = aes.CreateDecryptor(aes.Key, aes.IV))
+                using (var resultStream = new MemoryStream())
                 {
-                    string result;
-                    using (var msDecrypt = new MemoryStream(cipher))
+                    using (var aesStream = new CryptoStream(resultStream, decryptor, CryptoStreamMode.Write))
+                    using (var plainStream = new MemoryStream(ciphertext))
                     {
-                        using (var csDecrypt = new CryptoStream(msDecrypt,
-                            decryptor, CryptoStreamMode.Read))
-                        {
-                            using (var srDecrypt = new StreamReader(csDecrypt))
-                            {
-                                result = srDecrypt.ReadToEnd();
-                            }
-                        }
+                        plainStream.CopyTo(aesStream);
                     }
 
-                    return result;
+                    return Encoding.UTF8.GetString(resultStream.ToArray());
                 }
             }
         }
