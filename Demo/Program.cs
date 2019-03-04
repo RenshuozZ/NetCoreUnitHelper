@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,22 +10,39 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
-
-             Test();
-
-            Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
-            Console.ReadKey();
+            //Program.Test(new SmallCar());
+            var list = new List<SmallCar>() { new SmallCar() };
+            var Ilist = new List<ICar>();
+            foreach (var item in list)
+            {
+                Ilist.Add(item);
+            }
+            //Program.TestList(list.CopyTo(new List<ICar>()));
         }
 
-        static async void Test()
+        public static void Test(ICar car)
         {
-            await Task.Run(() =>
+            car.ShowName();
+        }
+
+        public static void TestList(List<ICar> car)
+        {
+            foreach (var item in car)
             {
-                Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
-            });
-            Console.WriteLine(" ThreadID: {0},IsBackGround:{1} ", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsBackground);
+                item.ShowName();
+            }
         }
     }
+    public interface ICar
+    {
+        void ShowName();
+    }
 
+    public class SmallCar : ICar
+    {
+        public void ShowName()
+        {
+            Console.WriteLine("aa");
+        }
+    }
 }
