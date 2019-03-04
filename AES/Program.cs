@@ -9,8 +9,8 @@ namespace AES
     {
         static void Main(string[] args)
         {
-            var key = Guid.NewGuid().ToString("N");
-            var name = "Jeffcky";
+            var key = "23a3fffd814d46c5894572163d63efdf";
+            var name = "40F32B28-F5F9-4E7A-A055-2DEE852FACE1";
             Console.WriteLine($"加密字符串为{name}");
             var encryptStr = Encrypt(name, key);
             Console.WriteLine($"加密后结果为：{encryptStr}");
@@ -54,11 +54,12 @@ namespace AES
         {
             var fullCipher = Convert.FromBase64String(input);
 
-            var iv = new byte[16];
-            var cipher = new byte[16];
+            byte[] iv = new byte[16];
+
+            var cipher = new byte[fullCipher.Length - iv.Length];
 
             Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, iv.Length, cipher, 0, fullCipher.Length - iv.Length);
             var decryptKey = Encoding.UTF8.GetBytes(key);
 
             using (var aesAlg = Aes.Create())
