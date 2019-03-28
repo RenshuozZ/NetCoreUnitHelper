@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayListCapacity", "ArrayL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES", "AES\AES.csproj", "{AD13B394-8338-47CC-8F39-1E4EBB6F6037}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreDBFirstGenerateModel", "EFCoreDBFirstGenerateModel\EFCoreDBFirstGenerateModel.csproj", "{84849A75-651D-4C80-873D-1D66BFD52C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreDBFirstGenerateModel", "EFCoreDBFirstGenerateModel\EFCoreDBFirstGenerateModel.csproj", "{84849A75-651D-4C80-873D-1D66BFD52C40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonPattern", "SingletonPattern\SingletonPattern.csproj", "{AE481F7D-6DC2-4B51-8AC3-CD70F372E146}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{84849A75-651D-4C80-873D-1D66BFD52C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84849A75-651D-4C80-873D-1D66BFD52C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84849A75-651D-4C80-873D-1D66BFD52C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE481F7D-6DC2-4B51-8AC3-CD70F372E146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE481F7D-6DC2-4B51-8AC3-CD70F372E146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE481F7D-6DC2-4B51-8AC3-CD70F372E146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE481F7D-6DC2-4B51-8AC3-CD70F372E146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
