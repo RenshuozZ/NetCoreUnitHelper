@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreDBFirstGenerateModel"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingletonPattern", "SingletonPattern\SingletonPattern.csproj", "{AE481F7D-6DC2-4B51-8AC3-CD70F372E146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathMethod", "MathMethod\MathMethod.csproj", "{DB97A8CF-0941-4118-BA01-C7847720D1C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathMethod", "MathMethod\MathMethod.csproj", "{DB97A8CF-0941-4118-BA01-C7847720D1C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerImageFile", "SqlServerImageFile\SqlServerImageFile.csproj", "{7C68055C-D867-496C-B183-EF6243F8392F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{DB97A8CF-0941-4118-BA01-C7847720D1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB97A8CF-0941-4118-BA01-C7847720D1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB97A8CF-0941-4118-BA01-C7847720D1C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C68055C-D867-496C-B183-EF6243F8392F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C68055C-D867-496C-B183-EF6243F8392F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C68055C-D867-496C-B183-EF6243F8392F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C68055C-D867-496C-B183-EF6243F8392F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
