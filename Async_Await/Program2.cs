@@ -6,7 +6,7 @@ namespace Async_Await
 {
     class Program2
     {
-        static void Main1(string[] args)
+        static void Main2(string[] args)
         {
 
             //Thread方法每次的Thread Id都是不同的，而Task方法的Thread Id是重复出现的。线程的创建和销毁是一个开销比较大的操作，Task每次执行将不会立即创建一个新线程，而是到CLR线程池查看是 否有空闲的线程，有的话就取一个线程处理这个请求，处理完请求后再把线程放回线程池，这个线程也不会立即撤销，而是设置为空闲状态，可供线程池再次调度， 从而减少开销。
